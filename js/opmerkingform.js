@@ -1,8 +1,8 @@
 $(document).ready(function runScript(){  
 
 	switchForm("logout");
-	var firebaseurl = "https://torrid-inferno-6428.firebaseio.com";
-	var phpserver = "https://computerhuys.nl/llopmapp/php/createtoken.php";
+	var firebaseurl = "<enter your firebaseurl>.firebaseio.com";
+	var phpserver = "<enter your phpserverurl>/php/createtoken.php";
 	
 	// Monitoring User Authentication State
 
