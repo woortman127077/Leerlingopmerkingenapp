@@ -1,0 +1,75 @@
+#BEGIN of file "sd_auth.sd"
+#![createToken]
+#!>>
+#!In dit schema wordt beschreven hoe 
+#!een token gegenereerd wordt
+#!
+#!<<
+
+user:Actor
+browser:Browser[pr] "Browser"
+doc:Document[a]
+opmForm:opmForm[a]
+loginForm:loginForm[a]
+login:LoginKnop[a]
+userRef:Firebase
+jQuery:jQuery[a]
+ref:Firebase
+con:Console[a]
+alert:Alert[a]
+phpServer:Server[pr] "PHPserver"
+
+   browser:userRef.
+   userRef:>userRef.createToken(user)&
+    [c:createToken]
+     userRef:jQuery.post(<phpserver-url>, {uid: user, level: 'docent'})
+     jQuery:browser.send httpRequest
+     browser:phpServer.POST ...
+     #volledige aanroep: browser:phpServer.POST <https\://phpserver-url>/maketoken.php met user en level
+     *1 jQuery
+vertel wat er moet gebeuren als 
+antwoord binnen is en bij fout
+     *1
+     (1)jQuery
+     jQuery:>jQuery.done(doneCallback(token))&
+     jQuery:>jQuery.error(errorCallback(error))&
+     [c:alt er komt een httpresponse OK]
+      phpServer:jQuery.token&
+      jQuery:>jQuery.doneCallback(token)&
+
+      jQuery:ref.authWithCustomToken(..)
+      #volledige aanroep: jQuery:authWithCustomToken(token,authHandler(error,authData))
+      [c:alt autStateChange]
+       ref:>ref.authDatacallback(authData)&
+       ref:state change triggert authDataCallback
+       ref:met authData!=null, zie 
+       *2 ref
+        link:sd_start.sd
+       *2
+       (2)ref
+       [c:authDataCallback]
+        ref:con.melding logged in
+        ref:>ref.update child users/uid&
+        ref:doc.switchForm("login")
+ [c:switchForm]
+  doc:opmForm.hide()
+  doc:loginForm.show()
+ [/c]
+       [/c]
+      [/c]
+      [c:authHandler]
+       [c:alt error]
+        ref:con.melding login failed
+       --[else]
+        ref:con.melding auth succes&
+
+       [/c]
+      [/c]
+     [/c]
+     [c:alt er komt een httpresponse niet OK]
+      phpServer:jQuery.error&
+      jQuery:>jQuery.errorCallback(token)&
+      jQuery:alert.melding create token mislukt
+     [/c] 
+    [/c]
+     #einde createToken

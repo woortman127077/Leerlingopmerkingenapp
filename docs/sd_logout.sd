@@ -1,0 +1,36 @@
+#BEGIN of file "sd_logout.sd"
+#![logoutClickHandler]
+#!>>
+#!In dit schema wordt beschreven wat er gebeurt als iemand 
+#!op de 'Logout'-knop geklikt heeft
+#!
+#!<<
+
+user:Actor
+browser:Browser[pr] "Browser"
+doc:Document[at]
+opmForm:opmForm[a]
+loginForm:loginForm[a]
+logout:LogoutKnop[a]
+ref:Firebase
+con:Console[a]
+
+user:browser.logout klik
+browser:doc.handle logout click&
+doc:logout.logoutClickHandler()
+logout:ref.unauth()
+ref:state change triggert authDataCallback
+ref:met authData=null
+[c:authDataCallback]
+ ref:con.melding logged out
+ ref:doc.switchForm("logout")
+ [c:switchForm]
+  doc:opmForm.show()
+  doc:loginForm.hide()
+ [/c]
+[/c]
+doc[1]:browser.ready
+browser:user.wachten op input
+*2 user
+link:sd_start.sd
+*2 

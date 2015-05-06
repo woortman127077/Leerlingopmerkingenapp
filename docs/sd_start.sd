@@ -1,0 +1,61 @@
+#BEGIN of file "sd_start.sd"
+#![Opstarten van de app]
+#!>>
+#!In dit schema wordt beschreven wat er gebeurt als iemand 
+#!de url van de leerlingopmerkingenapp bezoekt
+#!
+#!<<
+
+user:Actor
+browser:Browser[pr] "Browser"
+webServer:Server[pr] "Webserver"
+doc:Document[at]
+opmForm:opmForm[a]
+loginForm:loginForm[a]
+/ref:Firebase
+con:Console[a]
+login:LoginKnop[a]
+logout:LogoutKnop[a]
+leerling:LeerlingVeld[a]
+submit:OpslaanKnop[a]
+
+user:browser.show webpage
+browser:webServer.GET /
+webServer:browser.index.html&
+browser:user.toon html
+browser:doc.ready(runScript())&
+[c:runScript]
+ doc:>doc.switchForm()&
+ [c:switchForm]
+  doc:opmForm.hide()
+  doc:loginForm.show()
+ [/c]
+ doc:ref.new(<firebaseio-url>)
+ *1 doc
+vertel wat er moet gebeuren ('register callbacks') 
+bij diverse events (alleen authDataCallback wordt 
+nu meteen getriggerd)
+ *1
+ doc:ref.onAuth(authDataCallback(authData))
+ ref:state change triggert authDataCallback
+ ref:met authData=null
+ [c:authDataCallback]
+  ref:con.melding logged out
+  ref:>doc.switchForm("logout")&
+ [/c]
+ ref:>ref.onDisconnect(disconnectHandler())&
+ doc:login.click(loginClickHandler())
+ doc:logout.click(logoutClickHandler())
+ doc:leerling.change(changeHandler())
+ doc:submit.click(submitClickHandler())
+[/c]
+doc:browser.ready
+browser:user.wachten op input
+
+*2 user
+link:sd_login.sd
+*2 
+
+
+
+

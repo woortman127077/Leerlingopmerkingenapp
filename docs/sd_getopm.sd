@@ -1,0 +1,61 @@
+#BEGIN of file "sd_getopm.sd"
+#![Opmerkingenlijst van leerling tonen]
+#!>>
+#!In dit schema wordt beschreven hoe de 
+#!opmerkingencontainer bijgewerkt wordt
+#!
+#!<<
+
+user:Actor
+browser:Browser[pr] "Browser"
+webServer:Server[pr] "Webserver"
+doc:Document[a]
+/leerlingRef:Firebase
+alert:Alert[a]
+leerling:LeerlingVeld[a]
+opm:Opmerking[a]
+best:Bestanden[a]
+oc:OpmCont[a]
+goc:GeenOpmCont[a]
+otb:OpmTableBody[a]
+
+leerling:>leerling.getOpmerkingen(leerling)&
+[c:getOpmerkingen]
+ leerling:leerlingRef.new(<fb>/leerling/$leerling)
+ *1 leerlingRef
+hier wordt de hele inhoud van de map van de 
+leerling op de firebase webserver gedownload
+ *1
+(1)leerlingRef
+ leerlingRef:>leerlingRef.once("value",getHandler(s),errorHandler(e))& 
+ [c:getHandler]
+  leerlingRef:>leerlingRef.populateOpmContainer(s)&
+  [c:populateOpmContainer]
+   leerlingRef:otb.html("")
+   leerlingRef:>leerlingRef.s.forEach(maakHTMLTabelRegel(data))&
+   [c:maakrHTMLTabelRegel]
+    leerlingRef:cel1=leerlingRef.data.val().opmerking&
+    leerlingRef:cel2=leerlingRef.data.val().bestanden&
+    leerlingRef:cel3=leerlingRef.data.val().door&
+    leerlingRef:tr=leerlingRef.cel1+cel2+cel3&
+    leerlingRef:otb.prepend(tr)
+   [/c]
+  [/c]
+  leerlingRef:>leerlingRef.switchOpmContainer(s)&
+  [c:switchOpmContainer]
+   [c:alt s.exists()]
+    leerlingRef:goc.hide()
+    leerlingRef:oc.show()
+    --[else]
+    leerlingRef:goc.show()
+    leerlingRef:oc.hide()
+   [/c]
+  [/c]
+ [/c] 
+ #einde gethandler
+ [c:alt error]
+  [c:errorHandler]
+   leerlingRef:alert.melding ophalen leerlingopmerkingen mislukt
+  [/c]
+ [/c]
+[/c]

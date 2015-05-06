@@ -1,0 +1,46 @@
+#BEGIN of file "sd_llchange.sd"
+#![Leerling change handler]
+#!>>
+#!In dit schema wordt beschreven wat er gebeurt als iemand 
+#!de inhoud van inputveld Leerling gewijzigd heeft (andere leerling geselecteerd)
+#!
+#!<<
+
+user:Actor
+browser:Browser[pr] "Browser"
+webServer:Server[pr] "Webserver"
+doc:Document[at]
+/ref:Firebase
+alert:Alert[a]
+leerling:LeerlingVeld[a]
+opm:Opmerking[a]
+best:Bestanden[a]
+oc:OpmCont[a]
+goc:GeenOpmCont[a]
+otb:OpmTableBody[a]
+
+user:browser.change leerling
+browser:doc.handle change leerling&
+doc:dit triggert changeHandler
+doc:leerling.changeHandler()
+[c:changeHandler]
+ leerling:opm.val("")
+ leerling:best.val("")
+ leerling:>leerling.css(lightblue)&
+ [c:alt validInput]
+  leerling:>leerling.getOpmerkingen(leerling)&
+  *1 leerling
+link:sd_getopm.sd
+  *1
+  (1)leerling
+  --[else]
+  leerling:oc.hide()
+  leerling:goc.hide()
+  leerling:otb.hide()
+ [/c]
+[/c]
+doc:browser.ready
+browser:user.wachten op input
+*2 user
+link:sd_opslaan.sd
+*2 

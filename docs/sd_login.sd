@@ -1,0 +1,57 @@
+#BEGIN of file "sd_login.sd"
+#![loginClickHandler]
+#!>>
+#!In dit schema wordt beschreven wat er gebeurt als iemand 
+#!op de 'Login'-knop geklikt heeft
+#!
+#!<<
+
+user:Actor
+browser:Browser[pr] "Browser"
+doc:Document[at]
+login:LoginKnop[a]
+/userRef:Firebase
+jQuery:jQuery[a]
+ref:Firebase
+con:Console[a]
+alert:Alert[a]
+phpServer:Server[pr] "PHPserver"
+gn:DoorVeld[a]
+ww:CodeVeld[a]
+
+user:browser.login klik
+browser:doc.handle login click&
+doc:login.loginClickHandler()
+login:user=gn.val()
+login:>login.level="docent"&
+login:password=ww.val()
+login:validInput=login.inputValidateLogin(user, password)&
+[c:alt not user & password ]
+ login:alert.melding corrigeer input
+[/c]
+[c:alt validInput]
+ login:>login.getUser(user,password)&
+ [c:getUser]
+  login:userRef.new(<firebaseio-url>/users/$user)
+  login:userRef.once(...)
+  #volledige aanroep:  login:userRef.once("value", getHandler(snapshot), errorHandler(errorObject))
+  [c:getHandler]
+   [c:alt snapshot.val().password=password]
+    userRef:createToken(user), zie 
+    *1 userRef
+link:sd_auth.sd
+    *1
+    --[else]
+    userRef:alert.melding username / password ongeldig
+   [/c]
+  [/c]
+  [c:errorHandler]
+   userRef:alert.melding ophalen user uit database mislukt
+  [/c]
+ [/c]
+[/c]
+doc:browser.ready
+browser:user.wachten op input
+*2 user
+link:sd_llchange.sd
+*2 

@@ -1,0 +1,67 @@
+#BEGIN of file "sd_opslaan.sd"
+#![Submit clck handler]
+#!>>
+#!In dit schema wordt beschreven wat er gebeurt als iemand 
+#!op de knop opslaan (id=submit) klikt
+#!
+#!<<
+
+user:Actor
+browser:Browser[pr] "Browser"
+webServer:Server[pr] "Webserver"
+doc:Document[at]
+submit:Opslaan[a]
+ref:Firebase
+alert:Alert[a]
+leerling:LeerlingVeld[a]
+opm:Opmerking[a]
+best:Bestanden[a]
+oc:OpmCont[a]
+goc:GeenOpmCont[a]
+otb:OpmTableBody[a]
+
+user:browser.opslaan klik
+browser:doc.handle submit click&
+doc:dit triggert submitClickHandler
+doc:submit.submitClickHandler()
+[c:submitClickHandler]
+ submit:leerling=leerling.val()
+ submit:opmerking=opm.val()
+ submit:bestanden=best.val()
+ submit:user=ref.getAuth().uid
+ submit:>submit.success=true&
+ submit:validInput=submit.inputValidateOpm(leerling, opmerking)&
+ [c:alt validInput]
+  submit:leerlingnr=submit.updateLeerling(leerling)
+  [c:updateLeerling]
+   submit:>submit.obj={"naam"\: lls(), "klas"\: lls(), "klaskort"\: lls(), "lldropdown"\: leerling}&
+   submit:ref.child("leerling").child("leerlingnr").update({obj},updateHandler(data))
+   [c:updateHandler]
+    [c:alt data]
+     ref:>alert.data&
+     submit:>submit.success=false&
+    [/c]
+   [/c]
+  [/c]
+  submit[1]:>submit.pushOpmerking(leerlingnr, opmerking, bestanden,user)&
+  [c:pushOpmerking]
+   submit:>submit.obj={"opmerking"\: opmerking, "bestanden"\: bestanden, "door"\: user}&
+   submit:ref.child("leerling").child("leerlingnr").child("opmerkingen").push({obj},pushHandler(data))
+   [c:pushHandler]
+    [c:alt data]
+     ref:>alert.data&
+     submit:>submit.success=false&
+    [/c]
+    [c:alt success]
+     submit:alert.melding opgeslagen bedankt
+     submit:leerling.triggerHandler("change")
+    [/c]
+   [/c]
+  [/c]
+ [/c]
+[/c]
+doc:browser.ready
+browser:user.wachten op input
+*2 user
+link:sd_logout.sd
+*2 
