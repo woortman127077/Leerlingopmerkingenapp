@@ -1,7 +1,9 @@
 $(document).ready(function runScript(){  
 
 	switchForm("logout");
-	var firebaseurl = "https://<enter your-firebase here>.firebaseio.com";
+	var firebaseurl = "https://torrid-inferno-6428.firebaseio.com";
+	var phpserver = "https://computerhuys.nl/llopmapp/php/createtoken.php";
+	
 	// Monitoring User Authentication State
 
 	// Use the onAuth() method to listen for changes in user authentication state
@@ -109,7 +111,7 @@ $(document).ready(function runScript(){
 	// bron: http://stackoverflow.com/questions/16834138/javascript-function-post-and-call-php-script
 	
 	function createToken(user) {
-		$.post('https://computerhuys.nl/llopmapp/php/createtoken.php', {uid: user, level: 'docent'}).done(doneCallback).error(function(error){
+		$.post(phpserver, {uid: user, level: 'docent'}).done(doneCallback).error(function(error){
 				alert("Create token mislukt: "+error);
 			});
 	};
