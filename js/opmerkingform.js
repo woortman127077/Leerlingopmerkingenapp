@@ -1,6 +1,7 @@
 $(document).ready(function runScript(){  
 
 	switchForm("logout");
+	var firebaseurl = "https://torrid-inferno-6428.firebaseio.com";
 	// Monitoring User Authentication State
 
 	// Use the onAuth() method to listen for changes in user authentication state
@@ -18,7 +19,7 @@ $(document).ready(function runScript(){
 	}
 	
 	// Register the callback to be fired every time auth state changes
-	ref = new Firebase("https://torrid-inferno-6428.firebaseio.com");
+	ref = new Firebase(firebaseurl);
 	ref.onAuth(authDataCallback);
 	ref.onDisconnect(function disconnectHandler() {
 		ref.unauth();  // voorkomen dat ie ingelogd blijft
@@ -84,7 +85,8 @@ $(document).ready(function runScript(){
 	};
 
 	function getUser(user, password) {
-		var usersRef = new Firebase("https://torrid-inferno-6428.firebaseio.com/loapp_users");
+		var users_fburl = firebaseurl + "/loapp_users";
+		var usersRef = new Firebase(users_fburl);
 		// Authenticate users with a custom Firebase token
 		var userRef = usersRef.child(user);
 		// Attach an asynchronous callback to read the data at our user reference
@@ -179,7 +181,7 @@ $(document).ready(function runScript(){
 	}
 	
 	function updateLeerling(leerling) {
-		ref = new Firebase("https://torrid-inferno-6428.firebaseio.com/");
+		ref = new Firebase(firebaseurl);
 		var leerlingNummer = leerling.substring(0,6).trim();
 		var updatedObj = {              
 			"naam": leerling.substring(7,33).trim(),
@@ -213,7 +215,8 @@ $(document).ready(function runScript(){
 	};
 				
 	function getOpmerkingen(leerling) {
-		var leerlingenRef = new Firebase("https://torrid-inferno-6428.firebaseio.com/leerling");
+		leerling_fburl = firebaseurl + "/leerling";
+		var leerlingenRef = new Firebase(leerling_fburl);
 		var leerlingRef = leerlingenRef.child(leerling).child("opmerkingen");
 
 		leerlingRef.once("value", 
