@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+		<title>Assink Leerlingopmerkingenapp</title>
+		<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="https://rawgit.com/firebase/firebase-token-generator-node/master/dist/firebase-token-generator.js"></script>
+		
+		<link rel="stylesheet" href="css/opmerkingform.css" />
+		<script src="js/opmerkingform.js"></script>
+		<!-- <script src="js/login.js"></script> -->
+	
+	</head>
+	<body> 
+		
+		<div id="mainForm">
+			<!-- <h2>Assink Leerlingopmerkingenapp</h2> -->
+			<!-- Required div starts here -->
+			<img id='logo' src='images/logo-het-assink.png'>
+			<form id="loginForm">
+				<div id="logincontainer">
+					<fieldset>
+						<legend>Login:</legend>
+						<p class="loginlabel">Docent</p>
+						<select name='Door' id='Door'  class="loginfield" size='1' >
+							<option value='Maak een keuze...'>Maak een keuze...</option>
+							<option value='BAAJ'>BAAJ Jolanda Baart</option>
+							<option value='BEUN'>BEUN Jos Beun</option>
+							<option value='BEUZ'>BEUZ Patrick Beuze</option>
+							<option value='BIJM'>BIJM Marcel Bijman</option>
+							<option value='BOMK'>BOMK Ellis Bomkamp</option>
+							<option value='BOOL'>BOOL Bert Booltink</option>
+							<option value='BOSM'>BOSM Monique Bosch</option>
+							<option value='BOSF'>BOSF Elvira Boswinkel</option>
+							<option value='BRAK'>BRAK Karin Braak</option>
+							<option value='BREM'>BREM Mark Breteler</option>
+							<option value='BROE'>BROE Gijs Broens</option>
+							<option value='CRUC'>CRUC Wilna Crucq</option>
+							<option value='DYKB'>DYKB Berthil Dijkstra</option>
+							<option value='XXXX'>XXXX  Diverse Docenten</option>
+							<option value='GERA'>GERA Arthur Gerritsjans</option>
+							<option value='HAGD'>HAGD Dirk Hage</option>
+							<option value='HEND'>HEND Mike Hendriks</option>
+							<option value='HERR'>HERR Marjon Herregodts</option>
+							<option value='HOMM'>HOMM Anke Hommels</option>
+							<option value='HOYT'>HOYT René Hoytink</option>
+							<option value='HUIR'>HUIR Margreet Huirne</option>
+							<option value='JARO'>JARO Rosanne Jans</option>
+							<option value='JONC'>JONC Chantal Jong</option>
+							<option value='KALT'>KALT Tom Kalfsvel</option>
+							<option value='KEII'>KEII Iris Keizer</option>
+							<option value='KLIN'>KLIN Judith Klingeren</option>
+							<option value='KONI'>KONI Maja Konings</option>
+							<option value='KRAN'>KRAN Nicoline Korterik</option>
+							<option value='MLAN'>MLAN Mirthe Lansink</option>
+							<option value='LARD'>LARD Pierre Lardinois</option>
+							<option value='LEPP'>LEPP Marjolein Leppink</option>
+							<option value='MAKA'>MAKA Inez Makaske</option>
+							<option value='MARI'>MARI Erik Maris</option>
+							<option value='MEER'>MEER Jessica Meer</option>
+							<option value='MEIJ'>MEIJ Lea Meijnen</option>
+							<option value='MOLD'>MOLD Ben Molder</option>
+							<option value='NAAS'>NAAS Ruud Naastepad</option>
+							<option value='NYHH'>NYHH Herman Nijhuis</option>
+							<option value='NOOR'>NOOR Patrick Noordink</option>
+							<option value='OLDM'>OLDM Elvira Oldemaat</option>
+							<option value='REIN'>REIN Jan Reintjes</option>
+							<option value='RIEL'>RIEL René Riele</option>
+							<option value='RIPM'>RIPM Frank Ripmeester</option>
+							<option value='ROHA'>ROHA Jeroen Rohaan</option>
+							<option value='ROZI'>ROZI Dagmar Rozier</option>
+							<option value='SARK'>SARK Rik Sark</option>
+							<option value='SCNY'>SCNY Monique Schoenmaker</option>
+							<option value='SCHL'>SCHL Els Schutman</option>
+							<option value='SCRU'>SCRU Ruben Schuurman</option>
+							<option value='STHA'>STHA Hans Stam</option>
+							<option value='STEV'>STEV Dick Stevens</option>
+							<option value='TIER'>TIER Matte Tiersma</option>
+							<option value='VEEA'>VEEA Annelies Veen</option>
+							<option value='VOEM'>VOEM Tessa Voerman</option>
+							<option value='VOOR'>VOOR Wim Voort</option>
+							<option value='WIND'>WIND Dolf Winter</option>
+						</select><br/>			
+						<p class="loginlabel">Code</p>
+						<input type="text" id="Code" class="loginfield"/>
+					</fieldset>
+					<br/>
+					<div class="buttoncontainer">
+						<input type="button" id="login" value="Login"/>
+						<!-- <input type="button" id="logout" value="Logout"/> -->
+					</div>
+				</div>
+			</form>
+			<form id="opmForm" accept-charset='UTF-8'>
+				<h3>Leerlingopmerkingenapp</h3>
+				<label>* Leerling:</label>
+				<br/>
+				<select name='Leerling' id='Leerling' size='1'>
+					<option value='Maak een keuze...'>Maak een keuze...</option>
+					<option value='5H:'>5H:</option>
+					<option value='127623 Aaron Freriksen           (H5H3)'>127623 Aaron Freriksen           (H5H3)</option>
+					<option value='133020 Aimé Ntagengerwa          (H5H5)'>133020 Aimé Ntagengerwa          (H5H5)</option>
+					<option value='127754 Anke Baas                 (H5H1)'>127754 Anke Baas                 (H5H1)</option>
+					<option value='127225 Anna Fukkink              (H5H1)'>127225 Anna Fukkink              (H5H1)</option>
+					<option value='116978 Anne Karssies             (H5H1)'>116978 Anne Karssies             (H5H1)</option>
+					<option value='127894 Annemijn Tonen            (H5H3)'>127894 Annemijn Tonen            (H5H3)</option>
+					<option value='109270 Ashley Bollerman          (H5H3)'>109270 Ashley Bollerman          (H5H3)</option>
+					<option value='117851 Bas ter Huurne            (H5H1)'>117851 Bas ter Huurne            (H5H1)</option>
+					<option value='128251 Beau Bos                  (H5H3)'>128251 Beau Bos                  (H5H3)</option>
+					<option value='127951 Bente Klein Gunnewiek     (H5H1)'>127951 Bente Klein Gunnewiek     (H5H1)</option>
+					<option value='128544 Blijke Schipper           (H5H1)'>128544 Blijke Schipper           (H5H1)</option>
+					<option value='128473 Bo de Groot               (H5H5)'>128473 Bo de Groot               (H5H5)</option>
+					<option value='116448 Bob Werger                (H5H2)'>116448 Bob Werger                (H5H2)</option>
+					<option value='117937 Britt Vennevertloo        (H5H5)'>117937 Britt Vennevertloo        (H5H5)</option>
+					<option value='117208 Burak Gulyen              (H5H3)'>117208 Burak Gulyen              (H5H3)</option>
+					<option value='116524 Cas Balk                  (H5H4)'>116524 Cas Balk                  (H5H4)</option>
+					<option value='127067 Cas Zwerink               (H5H3)'>127067 Cas Zwerink               (H5H3)</option>
+					<option value='109382 Celina Veenendaal         (H5H2)'>109382 Celina Veenendaal         (H5H2)</option>
+					<option value='132981 Celine Gielen             (H5H5)'>132981 Celine Gielen             (H5H5)</option>
+					<option value='127890 Daisy van der Pol         (H5H4)'>127890 Daisy van der Pol         (H5H4)</option>
+					<option value='128210 Dana Nibbelink            (H5H5)'>128210 Dana Nibbelink            (H5H5)</option>
+					<option value='117449 Danique Schmaloer         (H5H2)'>117449 Danique Schmaloer         (H5H2)</option>
+					<option value='128203 Danique Westendorp        (H5H4)'>128203 Danique Westendorp        (H5H4)</option>
+					<option value='116976 Demi Swerink              (H5H4)'>116976 Demi Swerink              (H5H4)</option>
+					<option value='121034 Denise Kranenburg         (H5H4)'>121034 Denise Kranenburg         (H5H4)</option>
+					<option value='117421 Djara Tshisanda           (H5H4)'>117421 Djara Tshisanda           (H5H4)</option>
+					<option value='126744 Emma Laninga              (H5H2)'>126744 Emma Laninga              (H5H2)</option>
+					<option value='127994 Femke Eijsink             (H5H1)'>127994 Femke Eijsink             (H5H1)</option>
+					<option value='128029 Frédérique van Lochem     (H5H2)'>128029 Frédérique van Lochem     (H5H2)</option>
+					<option value='127508 Friso Oude Tanke          (H5H5)'>127508 Friso Oude Tanke          (H5H5)</option>
+					<option value='116982 Ian van den Vlekkert      (H5H3)'>116982 Ian van den Vlekkert      (H5H3)</option>
+					<option value='109772 Ilva Boersma              (H5H1)'>109772 Ilva Boersma              (H5H1)</option>
+					<option value='127632 Iris Tangermann           (H5H1)'>127632 Iris Tangermann           (H5H1)</option>
+					<option value='127565 Isabel Prins              (H5H5)'>127565 Isabel Prins              (H5H5)</option>
+					<option value='127906 Isabel Slot               (H5H5)'>127906 Isabel Slot               (H5H5)</option>
+					<option value='127873 Jeanine Trum              (H5H1)'>127873 Jeanine Trum              (H5H1)</option>
+					<option value='109161 Jens Bolster              (H5H4)'>109161 Jens Bolster              (H5H4)</option>
+					<option value='116970 Jolien van der Sluis      (H5H1)'>116970 Jolien van der Sluis      (H5H1)</option>
+					<option value='127732 Jolijn Gröniger           (H5H2)'>127732 Jolijn Gröniger           (H5H2)</option>
+					<option value='116675 Joran Nijhuis             (H5H4)'>116675 Joran Nijhuis             (H5H4)</option>
+					<option value='128266 Jord Eppink               (H5H5)'>128266 Jord Eppink               (H5H5)</option>
+					<option value='127039 Jordy te Raa              (H5H5)'>127039 Jordy te Raa              (H5H5)</option>
+					<option value='127928 Julia Ganzeboom           (H5H1)'>127928 Julia Ganzeboom           (H5H1)</option>
+					<option value='117663 Karlijn Scholten          (H5H4)'>117663 Karlijn Scholten          (H5H4)</option>
+					<option value='117941 Kayley Veelers            (H5H4)'>117941 Kayley Veelers            (H5H4)</option>
+					<option value='116858 Kim Grijsen               (H5H2)'>116858 Kim Grijsen               (H5H2)</option>
+					<option value='128001 Kirsten Lentink           (H5H4)'>128001 Kirsten Lentink           (H5H4)</option>
+					<option value='117020 Kjel de Vries             (H5H4)'>117020 Kjel de Vries             (H5H4)</option>
+					<option value='128639 Kjell Berentsen           (H5H3)'>128639 Kjell Berentsen           (H5H3)</option>
+					<option value='114701 Koen d&#039; Angremond         (H5H4)'>114701 Koen d' Angremond         (H5H4)</option>
+					<option value='127941 Lana Poodt                (H5H2)'>127941 Lana Poodt                (H5H2)</option>
+					<option value='117609 Larissa Goselink          (H5H4)'>117609 Larissa Goselink          (H5H4)</option>
+					<option value='109588 Lars van Hout             (H5H5)'>109588 Lars van Hout             (H5H5)</option>
+					<option value='127740 Laura Heemink             (H5H4)'>127740 Laura Heemink             (H5H4)</option>
+					<option value='117049 Laura Slotman             (H5H2)'>117049 Laura Slotman             (H5H2)</option>
+					<option value='127088 Laura Spierings           (H5H5)'>127088 Laura Spierings           (H5H5)</option>
+					<option value='117921 Laura Velthof             (H5H3)'>117921 Laura Velthof             (H5H3)</option>
+					<option value='117541 Laury van Tiel            (H5H1)'>117541 Laury van Tiel            (H5H1)</option>
+					<option value='117155 Linda Hu                  (H5H2)'>117155 Linda Hu                  (H5H2)</option>
+					<option value='128235 Lisa Winkelman            (H5H4)'>128235 Lisa Winkelman            (H5H4)</option>
+					<option value='116567 Lisanne Rikkerink         (H5H4)'>116567 Lisanne Rikkerink         (H5H4)</option>
+					<option value='117747 Loes Harleman             (H5H4)'>117747 Loes Harleman             (H5H4)</option>
+					<option value='109574 Loes ten Brinke           (H5H2)'>109574 Loes ten Brinke           (H5H2)</option>
+					<option value='127878 Loes ter Huurne           (H5H2)'>127878 Loes ter Huurne           (H5H2)</option>
+					<option value='117021 Loraine Kruidenier        (H5H2)'>117021 Loraine Kruidenier        (H5H2)</option>
+					<option value='127542 Marianne van Tintelen     (H5H4)'>127542 Marianne van Tintelen     (H5H4)</option>
+					<option value='117114 Mariëlle Dijkstra         (H5H4)'>117114 Mariëlle Dijkstra         (H5H4)</option>
+					<option value='117761 Marit Feddema             (H5H1)'>117761 Marit Feddema             (H5H1)</option>
+					<option value='109397 Marjolein Hakstegen       (H5H1)'>109397 Marjolein Hakstegen       (H5H1)</option>
+					<option value='127465 Marloes Wantia            (H5H4)'>127465 Marloes Wantia            (H5H4)</option>
+					<option value='128657 Mart van de Lisdonk       (H5H5)'>128657 Mart van de Lisdonk       (H5H5)</option>
+					<option value='109306 Martijn Richters          (H5H3)'>109306 Martijn Richters          (H5H3)</option>
+					<option value='127996 Martijn Wilderink         (H5H4)'>127996 Martijn Wilderink         (H5H4)</option>
+					<option value='110058 Mathijs Mört              (H5H2)'>110058 Mathijs Mört              (H5H2)</option>
+					<option value='127516 Matthijs Souilljee        (H5H5)'>127516 Matthijs Souilljee        (H5H5)</option>
+					<option value='128678 Maud Wessels              (H5H2)'>128678 Maud Wessels              (H5H2)</option>
+					<option value='118058 Maureen van Gaalen        (H5H1)'>118058 Maureen van Gaalen        (H5H1)</option>
+					<option value='128443 Mel Jeanson               (H5H1)'>128443 Mel Jeanson               (H5H1)</option>
+					<option value='128632 Michelle Robers           (H5H5)'>128632 Michelle Robers           (H5H5)</option>
+					<option value='117722 Mick de Herder            (H5H3)'>117722 Mick de Herder            (H5H3)</option>
+					<option value='128500 Mikey Mentink             (H5H3)'>128500 Mikey Mentink             (H5H3)</option>
+					<option value='117758 Milou van Baren           (H5H1)'>117758 Milou van Baren           (H5H1)</option>
+					<option value='116535 Minout Mink               (H5H4)'>116535 Minout Mink               (H5H4)</option>
+					<option value='117198 Nadir Abou Shady          (H5H5)'>117198 Nadir Abou Shady          (H5H5)</option>
+					<option value='128026 Nick Hilderink            (H5H4)'>128026 Nick Hilderink            (H5H4)</option>
+					<option value='128741 Niels Schukkink           (H5H5)'>128741 Niels Schukkink           (H5H5)</option>
+					<option value='127477 Niels Warfman             (H5H5)'>127477 Niels Warfman             (H5H5)</option>
+					<option value='117844 Nienke Griesen            (H5H4)'>117844 Nienke Griesen            (H5H4)</option>
+					<option value='127560 Nienke Temmink            (H5H2)'>127560 Nienke Temmink            (H5H2)</option>
+					<option value='128436 Nikki Ribbers             (H5H1)'>128436 Nikki Ribbers             (H5H1)</option>
+					<option value='128214 Nikki te Lintelo          (H5H1)'>128214 Nikki te Lintelo          (H5H1)</option>
+					<option value='117790 Noah Meere                (H5H3)'>117790 Noah Meere                (H5H3)</option>
+					<option value='126968 Olle ten Voorde           (H5H5)'>126968 Olle ten Voorde           (H5H5)</option>
+					<option value='127187 Pim van der Weij          (H5H5)'>127187 Pim van der Weij          (H5H5)</option>
+					<option value='127402 Rachel Aldib              (H5H2)'>127402 Rachel Aldib              (H5H2)</option>
+					<option value='117934 Remco Afink               (H5H1)'>117934 Remco Afink               (H5H1)</option>
+					<option value='109703 Rick te Hennepe           (H5H3)'>109703 Rick te Hennepe           (H5H3)</option>
+					<option value='127020 Robbin Wissink            (H5H4)'>127020 Robbin Wissink            (H5H4)</option>
+					<option value='127215 Romy Groot Obbink         (H5H2)'>127215 Romy Groot Obbink         (H5H2)</option>
+					<option value='109381 Roos Dokter               (H5H2)'>109381 Roos Dokter               (H5H2)</option>
+					<option value='127899 Rosan Terhürne            (H5H1)'>127899 Rosan Terhürne            (H5H1)</option>
+					<option value='117739 Samantha Sasse            (H5H1)'>117739 Samantha Sasse            (H5H1)</option>
+					<option value='116906 Sanne Schurink            (H5H4)'>116906 Sanne Schurink            (H5H4)</option>
+					<option value='128726 Sem Zeiss                 (H5H5)'>128726 Sem Zeiss                 (H5H5)</option>
+					<option value='127867 Seyma Candan              (H5H1)'>127867 Seyma Candan              (H5H1)</option>
+					<option value='110264 Simon van der Lei         (H5H4)'>110264 Simon van der Lei         (H5H4)</option>
+					<option value='127931 Sophie Grondman           (H5H3)'>127931 Sophie Grondman           (H5H3)</option>
+					<option value='128689 Sophie ter Hedde          (H5H2)'>128689 Sophie ter Hedde          (H5H2)</option>
+					<option value='127842 Stef Kuipers              (H5H3)'>127842 Stef Kuipers              (H5H3)</option>
+					<option value='117768 Stefan Hoogland           (H5H5)'>117768 Stefan Hoogland           (H5H5)</option>
+					<option value='127722 Steven Alferink           (H5H3)'>127722 Steven Alferink           (H5H3)</option>
+					<option value='110209 Stijn Tetteroo            (H5H5)'>110209 Stijn Tetteroo            (H5H5)</option>
+					<option value='127698 Sven Alferink             (H5H5)'>127698 Sven Alferink             (H5H5)</option>
+					<option value='128206 Tess Velthuis             (H5H2)'>128206 Tess Velthuis             (H5H2)</option>
+					<option value='116824 Teun Oosterholt           (H5H4)'>116824 Teun Oosterholt           (H5H4)</option>
+					<option value='128020 Teun Wegdam               (H5H5)'>128020 Teun Wegdam               (H5H5)</option>
+					<option value='116880 Thijs Jansen van &#039;t Laar  (H5H3)'>116880 Thijs Jansen van 't Laar  (H5H3)</option>
+					<option value='128686 Thijs Onstein             (H5H3)'>128686 Thijs Onstein             (H5H3)</option>
+					<option value='117897 Thijs Somsen              (H5H5)'>117897 Thijs Somsen              (H5H5)</option>
+					<option value='127998 Thomas Knijff             (H5H3)'>127998 Thomas Knijff             (H5H3)</option>
+					<option value='116832 Thomas van der Holst      (H5H1)'>116832 Thomas van der Holst      (H5H1)</option>
+					<option value='128685 Tiemen Onstein            (H5H4)'>128685 Tiemen Onstein            (H5H4)</option>
+					<option value='127586 Ties Verberne             (H5H3)'>127586 Ties Verberne             (H5H3)</option>
+					<option value='128230 Tijn Derkink              (H5H3)'>128230 Tijn Derkink              (H5H3)</option>
+					<option value='133683 Toby Leusink              (H5H1)'>133683 Toby Leusink              (H5H1)</option>
+					<option value='128700 Tom Geessinck             (H5H5)'>128700 Tom Geessinck             (H5H5)</option>
+					<option value='118079 Tom Goorden               (H5H5)'>118079 Tom Goorden               (H5H5)</option>
+					<option value='117640 Tosca van Aaken           (H5H2)'>117640 Tosca van Aaken           (H5H2)</option>
+					<option value='117547 Vera Waanders             (H5H2)'>117547 Vera Waanders             (H5H2)</option>
+					<option value='127720 Wouter Barink             (H5H5)'>127720 Wouter Barink             (H5H5)</option>
+					<option value='127624 Youri klein Snakenborg    (H5H5)'>127624 Youri klein Snakenborg    (H5H5)</option>
+					<option value='127201 Zümra Kusçu               (H5H2)'>127201 Zümra Kusçu               (H5H2)</option>
+					<option value=''></option>
+					<option value='6V:'>6V:</option>
+					<option value='117867 Anna olde Bolhaar         (H6V2)'>117867 Anna olde Bolhaar         (H6V2)</option>
+					<option value='117399 Anna Tenhagen             (H6V3)'>117399 Anna Tenhagen             (H6V3)</option>
+					<option value='117836 Annelot Antink            (H6V3)'>117836 Annelot Antink            (H6V3)</option>
+					<option value='117918 Bart ter Huurne           (H6V3)'>117918 Bart ter Huurne           (H6V3)</option>
+					<option value='117755 Bram Natter               (H6V3)'>117755 Bram Natter               (H6V3)</option>
+					<option value='117318 Caitlin Pardoen           (H6V2)'>117318 Caitlin Pardoen           (H6V2)</option>
+					<option value='117599 Cas Goselink              (H6V3)'>117599 Cas Goselink              (H6V3)</option>
+					<option value='117882 Celeste Mulder            (H6V3)'>117882 Celeste Mulder            (H6V3)</option>
+					<option value='109225 Chiel Kienhuis            (H6V2)'>109225 Chiel Kienhuis            (H6V2)</option>
+					<option value='116867 Cleo Huisman              (H6V1)'>116867 Cleo Huisman              (H6V1)</option>
+					<option value='117857 Dim Hoogeveen             (H6V2)'>117857 Dim Hoogeveen             (H6V2)</option>
+					<option value='117821 Eline Bos                 (H6V3)'>117821 Eline Bos                 (H6V3)</option>
+					<option value='117962 Elke Brummelhuis          (H6V3)'>117962 Elke Brummelhuis          (H6V3)</option>
+					<option value='117884 Ellen Kiens               (H6V1)'>117884 Ellen Kiens               (H6V1)</option>
+					<option value='117924 Elles van Sark            (H6V2)'>117924 Elles van Sark            (H6V2)</option>
+					<option value='117905 Emma Wissink              (H6V1)'>117905 Emma Wissink              (H6V1)</option>
+					<option value='117583 Femke Vossebeld           (H6V3)'>117583 Femke Vossebeld           (H6V3)</option>
+					<option value='117803 Frank Somhorst            (H6V2)'>117803 Frank Somhorst            (H6V2)</option>
+					<option value='116905 Guus ter Braak            (H6V2)'>116905 Guus ter Braak            (H6V2)</option>
+					<option value='117774 Hansje ter Hedde          (H6V2)'>117774 Hansje ter Hedde          (H6V2)</option>
+					<option value='117886 Jelle Michorius           (H6V1)'>117886 Jelle Michorius           (H6V1)</option>
+					<option value='117442 Jérémie Ntagengerwa       (H6V3)'>117442 Jérémie Ntagengerwa       (H6V3)</option>
+					<option value='109640 Jessica Rietman           (H6V3)'>109640 Jessica Rietman           (H6V3)</option>
+					<option value='118033 Jetske Nijman             (H6V1)'>118033 Jetske Nijman             (H6V1)</option>
+					<option value='118043 Jodi Freriksen            (H6V2)'>118043 Jodi Freriksen            (H6V2)</option>
+					<option value='109518 Joep Sticker              (H6V2)'>109518 Joep Sticker              (H6V2)</option>
+					<option value='109721 Jordy Sak                 (H6V2)'>109721 Jordy Sak                 (H6V2)</option>
+					<option value='110119 Julia Laninga             (H6V2)'>110119 Julia Laninga             (H6V2)</option>
+					<option value='117552 Kirsten Rupert            (H6V3)'>117552 Kirsten Rupert            (H6V3)</option>
+					<option value='117320 Koen Horstink             (H6V3)'>117320 Koen Horstink             (H6V3)</option>
+					<option value='117798 Lauren Kerkhof            (H6V3)'>117798 Lauren Kerkhof            (H6V3)</option>
+					<option value='117729 Leon Schutten             (H6V1)'>117729 Leon Schutten             (H6V1)</option>
+					<option value='117676 Linda Huiskamp            (H6V1)'>117676 Linda Huiskamp            (H6V1)</option>
+					<option value='109175 Linde Mestriner           (H6V3)'>109175 Linde Mestriner           (H6V3)</option>
+					<option value='118023 Lisette Goorhuis          (H6V3)'>118023 Lisette Goorhuis          (H6V3)</option>
+					<option value='116463 Lotte Azink               (H6V1)'>116463 Lotte Azink               (H6V1)</option>
+					<option value='116546 Lotte Lammerink           (H6V1)'>116546 Lotte Lammerink           (H6V1)</option>
+					<option value='109845 Luc Temminghoff           (H6V1)'>109845 Luc Temminghoff           (H6V1)</option>
+					<option value='117780 Luuk Nieuwenhuis          (H6V3)'>117780 Luuk Nieuwenhuis          (H6V3)</option>
+					<option value='117615 Maaike Besteman           (H6V3)'>117615 Maaike Besteman           (H6V3)</option>
+					<option value='117890 Maartje Vonk              (H6V1)'>117890 Maartje Vonk              (H6V1)</option>
+					<option value='117328 Mark Busschers            (H6V1)'>117328 Mark Busschers            (H6V1)</option>
+					<option value='117894 Martijn Remmelink         (H6V1)'>117894 Martijn Remmelink         (H6V1)</option>
+					<option value='117777 Martijn Veurink           (H6V3)'>117777 Martijn Veurink           (H6V3)</option>
+					<option value='117792 Max Achterweust           (H6V2)'>117792 Max Achterweust           (H6V2)</option>
+					<option value='117200 Menno Grooters            (H6V2)'>117200 Menno Grooters            (H6V2)</option>
+					<option value='110032 Menno Vreemann            (H6V3)'>110032 Menno Vreemann            (H6V3)</option>
+					<option value='109197 Michelle Wildenborg       (H6V3)'>109197 Michelle Wildenborg       (H6V3)</option>
+					<option value='117928 Mirthe Koenderink         (H6V1)'>117928 Mirthe Koenderink         (H6V1)</option>
+					<option value='109632 Nicole Verveld            (H6V3)'>109632 Nicole Verveld            (H6V3)</option>
+					<option value='118568 Nienke Heuver             (H6V1)'>118568 Nienke Heuver             (H6V1)</option>
+					<option value='117783 Petra ter Huurne          (H6V1)'>117783 Petra ter Huurne          (H6V1)</option>
+					<option value='117915 Roelof Mestriner          (H6V3)'>117915 Roelof Mestriner          (H6V3)</option>
+					<option value='110076 Roy van Krimpen           (H6V3)'>110076 Roy van Krimpen           (H6V3)</option>
+					<option value='116900 Sanne Dijksterhuis        (H6V3)'>116900 Sanne Dijksterhuis        (H6V3)</option>
+					<option value='116926 Sanne Tankink             (H6V3)'>116926 Sanne Tankink             (H6V3)</option>
+					<option value='116897 Sharon Spoor              (H6V1)'>116897 Sharon Spoor              (H6V1)</option>
+					<option value='117716 Sjanne Hofman             (H6V1)'>117716 Sjanne Hofman             (H6V1)</option>
+					<option value='117354 Stef Hulzink              (H6V2)'>117354 Stef Hulzink              (H6V2)</option>
+					<option value='110123 Stephan Leinweber         (H6V2)'>110123 Stephan Leinweber         (H6V2)</option>
+					<option value='116961 Stijn Middelhuis          (H6V3)'>116961 Stijn Middelhuis          (H6V3)</option>
+					<option value='117337 Tess Jansen               (H6V2)'>117337 Tess Jansen               (H6V2)</option>
+					<option value='117765 Tess te Velde             (H6V1)'>117765 Tess te Velde             (H6V1)</option>
+					<option value='116544 Tessa van Gemeren         (H6V1)'>116544 Tessa van Gemeren         (H6V1)</option>
+					<option value='117415 Timo Brouwer              (H6V2)'>117415 Timo Brouwer              (H6V2)</option>
+					<option value='116656 Timo Screever             (H6V2)'>116656 Timo Screever             (H6V2)</option>
+					<option value='117420 Timon Schuurmans          (H6V1)'>117420 Timon Schuurmans          (H6V1)</option>
+					<option value='117332 Tom Groenewold            (H6V1)'>117332 Tom Groenewold            (H6V1)</option>
+					<option value='109240 Tom Schulte               (H6V3)'>109240 Tom Schulte               (H6V3)</option>
+					<option value='117613 Twan Lichtenberg          (H6V2)'>117613 Twan Lichtenberg          (H6V2)</option>
+					<option value='117752 Vera Bouman               (H6V1)'>117752 Vera Bouman               (H6V1)</option>
+					<option value='117908 Vera Knigge               (H6V2)'>117908 Vera Knigge               (H6V2)</option>
+					<option value='109803 Willem Noordink           (H6V1)'>109803 Willem Noordink           (H6V1)</option>
+				</select><br/>
+				<br/>	
+				<label>* Opmerking:</label>
+				<br/>
+				<textarea placeholder="Jouw opmerking over deze leerling..." id="Opmerking"></textarea><br/>
+				<br/>	
+				<label>Bestanden:</label>
+				<br/>
+				<textarea placeholder="Map en naam van bestand(en) bij deze opmerking..." id="Bestanden"></textarea><br/>
+				<br/>
+
+				<div class="buttoncontainer">
+					<input type="button" id="submit" value="Opslaan"/>
+					<input type="button" id="logout" value="Logout"/>
+				</div>
+				
+				<br/><br/>
+				<div id="opmerkingcontainer">
+					<label style="display:block; float: left;">Dit werd er al gezegd:</label><br/><br/>
+					<div id="tablearea" >
+						<table id="opmtable" cellspacing="0">
+							<thead>
+								<th id="thopmerking">opmerking</th>
+								<th id="thbestanden">bestanden</th>
+								<th id="thdoor">door</th>
+							</thead>
+							<tbody id="opmtablebody">
+							</tbody>
+						</table><br/>
+					</div> 
+				</div>
+				<div id="geenopmerkingcontainer">
+					<label style="float: left;">Nog geen opmerkingen voor deze leerling</label><br/><br/><br/>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
+ 
