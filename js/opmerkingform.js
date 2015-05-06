@@ -1,7 +1,7 @@
 $(document).ready(function runScript(){  
 
 	switchForm("logout");
-	var firebaseurl = "https://torrid-inferno-6428.firebaseio.com";
+	var firebaseurl = "https://<enter your-firebase here>.firebaseio.com";
 	// Monitoring User Authentication State
 
 	// Use the onAuth() method to listen for changes in user authentication state
